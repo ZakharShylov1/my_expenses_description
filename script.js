@@ -258,7 +258,7 @@ const T = {
 };
 
 /* ---- language state ---- */
-let currentLang = localStorage.getItem('lang') || 'ru';
+let currentLang = localStorage.getItem('lang') || 'en';
 
 function applyLang(lang) {
     currentLang = lang;
