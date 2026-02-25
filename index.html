@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Expenses — Privacy-First Finance Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ CURSOR ============ -->
+<div class="cursor" id="cursor"><div class="cursor-dot"></div></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="#" class="logo"><div class="logo-mark">M</div>My Expenses</a>
+        <div class="nav-links">
+            <a href="#features" data-i18n="nav.features">Возможности</a>
+            <a href="#screens" data-i18n="nav.interface">Интерфейс</a>
+            <a href="#flow" data-i18n="nav.how">Как работает</a>
+            <a href="#ml" data-i18n="nav.ml">Локальный ML</a>
+            <a href="#arch" data-i18n="nav.tech">Технологии</a>
+            <a href="#privacy" data-i18n="nav.privacy">Приватность</a>
+        </div>
+        <div class="lang-switch" id="langSwitch">
+            <button class="lang-btn active" data-lang="ru">RU</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="#download" class="nav-cta magnetic" data-i18n="nav.download">Скачать</a>
+    </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+    <!-- BG layers -->
+    <div class="hero-aurora"></div>
+    <div class="hero-grid-bg"></div>
+    <div class="hero-radial"></div>
+    <div class="hero-noise"></div>
+
+    <div class="hero-content">
+        <div class="hero-pill"><span class="pill-dot"></span> <span data-i18n="hero.pill">Доступно на iOS и Android</span></div>
+        <h1 class="hero-h1" data-i18n-html="hero.h1">
+            <span class="h1-line"><span class="h1-word">Учёт</span> <span class="h1-word">расходов.</span></span>
+            <span class="h1-line"><span class="h1-word">Не</span> <span class="h1-word h1-grad">ваших данных.</span></span>
+        </h1>
+        <p class="hero-sub" data-i18n-html="hero.sub">Ноль серверов. Ноль регистрации. Ноль компромиссов.<br>ML-категоризация на устройстве. Импорт банковской выписки за секунды.</p>
+        <div class="hero-btns">
+            <a href="#download" class="btn-main magnetic"><span data-i18n="hero.btn1">Скачать приложение</span><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            <a href="#flow" class="btn-outline magnetic"><span data-i18n="hero.btn2">Как это работает</span></a>
+        </div>
+        <div class="scroll-cue"><div class="scroll-cue-line"></div></div>
+    </div>
+
+    <!-- 3 illustrative phone mockups -->
+    <div class="hero-phones" id="heroPhones">
+        <div class="h-phone h-phone-l" id="phoneL">
+            <div class="mockup">
+                <div class="mockup-notch"></div>
+                <div class="mockup-screen screen-stats">
+                    <div class="ms-header">Stats</div>
+                    <div class="ms-period"><span>Month</span><span>Feb 2026</span></div>
+                    <div class="ms-donut">
+                        <svg viewBox="0 0 120 120" class="donut-svg">
+                            <circle cx="60" cy="60" r="48" fill="none" stroke="#1e1e2e" stroke-width="14"/>
+                            <circle cx="60" cy="60" r="48" fill="none" stroke="#8b5cf6" stroke-width="14" stroke-dasharray="132 170" stroke-dashoffset="0" stroke-linecap="round" class="donut-seg donut-seg-1"/>
+                            <circle cx="60" cy="60" r="48" fill="none" stroke="#3b82f6" stroke-width="14" stroke-dasharray="98 204" stroke-dashoffset="-132" stroke-linecap="round" class="donut-seg donut-seg-2"/>
+                            <circle cx="60" cy="60" r="48" fill="none" stroke="#a3e635" stroke-width="14" stroke-dasharray="57 245" stroke-dashoffset="-230" stroke-linecap="round" class="donut-seg donut-seg-3"/>
+                            <circle cx="60" cy="60" r="48" fill="none" stroke="#f472b6" stroke-width="14" stroke-dasharray="15 287" stroke-dashoffset="-287" stroke-linecap="round" class="donut-seg donut-seg-4"/>
+                        </svg>
+                        <div class="donut-center"><span class="donut-label">Total</span><span class="donut-val">&euro;403</span></div>
+                    </div>
+                    <div class="ms-rows">
+                        <div class="ms-row"><span class="ms-dot" style="background:#8b5cf6"></span>Clothing<span class="ms-amt">&euro;176</span></div>
+                        <div class="ms-row"><span class="ms-dot" style="background:#3b82f6"></span>Groceries<span class="ms-amt">&euro;131</span></div>
+                        <div class="ms-row"><span class="ms-dot" style="background:#a3e635"></span>Sports<span class="ms-amt">&euro;76</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h-phone h-phone-c" id="phoneC">
+            <div class="mockup mockup-hero">
+                <div class="mockup-notch"></div>
+                <div class="mockup-screen screen-home">
+                    <div class="mh-date">25 February 2026</div>
+                    <div class="mh-card">
+                        <div class="mh-card-label">Spent today</div>
+                        <div class="mh-card-val">&euro;0.00</div>
+                    </div>
+                    <div class="mh-empty">No expenses yet</div>
+                    <div class="mh-tabs">
+                        <span class="mh-tab mh-tab-active">Home</span>
+                        <span class="mh-tab">Stats</span>
+                        <span class="mh-tab">Budget</span>
+                        <span class="mh-tab">Settings</span>
+                    </div>
+                    <div class="mh-fab">+</div>
+                </div>
+            </div>
+            <div class="phone-glow"></div>
+        </div>
+
+        <div class="h-phone h-phone-r" id="phoneR">
+            <div class="mockup">
+                <div class="mockup-notch"></div>
+                <div class="mockup-screen screen-budget">
+                    <div class="mb-header">Budget</div>
+                    <div class="mb-card">
+                        <div class="mb-title">Monthly budget</div>
+                        <div class="mb-input">2 500</div>
+                        <div class="mb-meta"><span>Spent</span><span>&euro;403.49</span></div>
+                        <div class="mb-meta mb-meta-green"><span>Remaining</span><span>&euro;2,096.51</span></div>
+                        <div class="mb-bar"><div class="mb-bar-fill"></div></div>
+                    </div>
+                    <div class="mb-days-title">Top spending days</div>
+                    <div class="mb-day"><span>13 Feb</span><span>&euro;129.75</span></div>
+                    <div class="mb-day"><span>23 Feb</span><span>&euro;111.00</span></div>
+                    <div class="mb-day"><span>9 Feb</span><span>&euro;86.00</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Metrics bar -->
+    <div class="hero-metrics" id="heroMetrics">
+        <div class="hm"><span class="hm-v" data-to="0">0</span><span class="hm-l" data-i18n="metrics.servers">серверов</span></div>
+        <div class="hm-div"></div>
+        <div class="hm"><span class="hm-v">100%</span><span class="hm-l" data-i18n="metrics.device">на устройстве</span></div>
+        <div class="hm-div"></div>
+        <div class="hm"><span class="hm-v">&lt;1s</span><span class="hm-l" data-i18n="metrics.csv">импорт CSV</span></div>
+        <div class="hm-div"></div>
+        <div class="hm"><span class="hm-v">0 KB</span><span class="hm-l" data-i18n="metrics.data">данных отправлено</span></div>
+    </div>
+
+</section>
+
+<!-- ============ SUMMARY ============ -->
+<section class="section sec-summary" id="summary">
+    <div class="wrap-sm">
+        <p class="summary-text" id="summaryText" data-i18n-summary="summary">My Expenses решает конкретную задачу — быстрый, приватный и понятный учёт личных расходов без навязанных подписок и облачных сервисов. Данные не покидают устройство. Импорт банковской выписки — секунды. Автокатегоризация — на устройстве. Без регистрации, без backend, без компромиссов.</p>
+    </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="section sec-feat" id="features">
+    <div class="wrap">
+        <div class="sec-head"><span class="tag" data-i18n="feat.tag">Основные функции</span><h2 data-i18n-html="feat.h2">Всё что нужно.<br>Ничего лишнего.</h2></div>
+        <div class="feat-grid">
+            <div class="feat-card">
+                <div class="fc-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+                <h3 data-i18n="feat1.h3">Ручной ввод</h3>
+                <p data-i18n="feat1.p">Сумма, категория, название, дата. Добавление расхода за 3 секунды.</p>
+                <span class="fc-num">01</span>
+            </div>
+            <div class="feat-card">
+                <div class="fc-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                <h3 data-i18n="feat2.h3">Импорт CSV</h3>
+                <p data-i18n="feat2.p">Загрузите банковскую выписку. Автоопределение формата, дат, разделителей.</p>
+                <span class="fc-num">02</span>
+            </div>
+            <div class="feat-card">
+                <div class="fc-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <h3 data-i18n="feat3.h3">Автокатегоризация</h3>
+                <p data-i18n="feat3.p">3-уровневая система на устройстве: правила мерчантов, словарь ключевых слов, локальный ML.</p>
+                <span class="fc-num">03</span>
+            </div>
+            <div class="feat-card">
+                <div class="fc-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21.21 15.89A10 10 0 118 2.83"/><path d="M22 12A10 10 0 0012 2v10z"/></svg></div>
+                <h3 data-i18n="feat4.h3">Аналитика</h3>
+                <p data-i18n="feat4.p">Разбивка по категориям, фильтры по периодам, donut-диаграммы, детализация.</p>
+                <span class="fc-num">04</span>
+            </div>
+            <div class="feat-card">
+                <div class="fc-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/></svg></div>
+                <h3 data-i18n="feat5.h3">Контроль бюджета</h3>
+                <p data-i18n="feat5.p">Месячный лимит, потрачено/осталось, прогресс-бар, топ дней по расходам.</p>
+                <span class="fc-num">05</span>
+            </div>
+            <div class="feat-card">
+                <div class="fc-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <h3 data-i18n="feat6.h3">Приватность прежде всего</h3>
+                <p data-i18n="feat6.p">Никаких серверов. Никаких аккаунтов. Никакого трекинга. Данные остаются на устройстве.</p>
+                <span class="fc-num">06</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ SCREENS SHOWCASE — DRAG CAROUSEL ============ -->
+<section class="section sec-screens" id="screens">
+    <div class="wrap">
+        <div class="sec-head"><span class="tag" data-i18n="screens.tag">Интерфейс</span><h2 data-i18n="screens.h2">Создан для ясности.</h2></div>
+    </div>
+    <div class="carousel-wrap">
+        <div class="carousel" id="carousel">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- card 1 -->
+                <div class="sc-card">
+                    <div class="sc-phone">
+                        <div class="mockup mockup-showcase">
+                            <div class="mockup-notch"></div>
+                            <div class="mockup-screen screen-home screen-home-showcase">
+                                <div class="mh-date">25 February 2026</div>
+                                <div class="mh-card"><div class="mh-card-label">Spent today</div><div class="mh-card-val">&euro;47.30</div></div>
+                                <div class="mh-expense"><span class="mh-exp-cat" style="background:#8b5cf6"></span><div><strong>H&amp;M</strong><br><small>Clothing</small></div><span class="mh-exp-amt">-&euro;35.00</span></div>
+                                <div class="mh-expense"><span class="mh-exp-cat" style="background:#f472b6"></span><div><strong>Starbucks</strong><br><small>Cafe</small></div><span class="mh-exp-amt">-&euro;4.80</span></div>
+                                <div class="mh-expense"><span class="mh-exp-cat" style="background:#3b82f6"></span><div><strong>LIDL</strong><br><small>Groceries</small></div><span class="mh-exp-amt">-&euro;7.50</span></div>
+                                <div class="mh-tabs"><span class="mh-tab mh-tab-active">Home</span><span class="mh-tab">Stats</span><span class="mh-tab">Budget</span><span class="mh-tab">Settings</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sc-info"><span class="sc-tag" data-i18n="sc1.tag">Главная</span><h3 data-i18n="sc1.h3">Расходы за день</h3><p data-i18n="sc1.p">Текущая дата, общая сумма, хронологический список. Одно нажатие для добавления.</p></div>
+                </div>
+                <!-- card 2 -->
+                <div class="sc-card">
+                    <div class="sc-phone">
+                        <div class="mockup mockup-showcase">
+                            <div class="mockup-notch"></div>
+                            <div class="mockup-screen screen-stats">
+                                <div class="ms-header">Stats</div>
+                                <div class="ms-period"><span>Month</span><span>Feb 2026</span></div>
+                                <div class="ms-donut">
+                                    <svg viewBox="0 0 120 120" class="donut-svg">
+                                        <circle cx="60" cy="60" r="48" fill="none" stroke="#1e1e2e" stroke-width="14"/>
+                                        <circle cx="60" cy="60" r="48" fill="none" stroke="#8b5cf6" stroke-width="14" stroke-dasharray="132 170" stroke-dashoffset="0" stroke-linecap="round"/>
+                                        <circle cx="60" cy="60" r="48" fill="none" stroke="#3b82f6" stroke-width="14" stroke-dasharray="98 204" stroke-dashoffset="-132" stroke-linecap="round"/>
+                                        <circle cx="60" cy="60" r="48" fill="none" stroke="#a3e635" stroke-width="14" stroke-dasharray="57 245" stroke-dashoffset="-230" stroke-linecap="round"/>
+                                    </svg>
+                                    <div class="donut-center"><span class="donut-label">Total</span><span class="donut-val">&euro;403</span></div>
+                                </div>
+                                <div class="ms-rows">
+                                    <div class="ms-row"><span class="ms-dot" style="background:#8b5cf6"></span>Clothing<span class="ms-amt">&euro;176</span></div>
+                                    <div class="ms-row"><span class="ms-dot" style="background:#3b82f6"></span>Groceries<span class="ms-amt">&euro;131</span></div>
+                                    <div class="ms-row"><span class="ms-dot" style="background:#a3e635"></span>Sports<span class="ms-amt">&euro;76</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sc-info"><span class="sc-tag" data-i18n="sc2.tag">Статистика</span><h3 data-i18n="sc2.h3">Разбивка по категориям</h3><p data-i18n="sc2.p">Интерактивная donut-диаграмма. Фильтры по периодам. Процент по каждой категории.</p></div>
+                </div>
+                <!-- card 3 -->
+                <div class="sc-card">
+                    <div class="sc-phone">
+                        <div class="mockup mockup-showcase">
+                            <div class="mockup-notch"></div>
+                            <div class="mockup-screen screen-budget">
+                                <div class="mb-header">Budget</div>
+                                <div class="mb-card">
+                                    <div class="mb-title">Monthly budget</div>
+                                    <div class="mb-input">2 500</div>
+                                    <div class="mb-meta"><span>Spent</span><span>&euro;403</span></div>
+                                    <div class="mb-meta mb-meta-green"><span>Remaining</span><span>&euro;2,097</span></div>
+                                    <div class="mb-bar"><div class="mb-bar-fill"></div></div>
+                                </div>
+                                <div class="mb-days-title">Top spending days</div>
+                                <div class="mb-day"><span>13 Feb</span><span>&euro;129</span></div>
+                                <div class="mb-day"><span>23 Feb</span><span>&euro;111</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sc-info"><span class="sc-tag" data-i18n="sc3.tag">Бюджет</span><h3 data-i18n="sc3.h3">Контроль лимитов</h3><p data-i18n="sc3.p">Месячный бюджет. Прогресс-бар. Рейтинг самых затратных дней.</p></div>
+                </div>
+                <!-- card 4 — CSV import -->
+                <div class="sc-card">
+                    <div class="sc-phone">
+                        <div class="mockup mockup-showcase">
+                            <div class="mockup-notch"></div>
+                            <div class="mockup-screen screen-import">
+                                <div class="mi-header">Import CSV</div>
+                                <div class="mi-file"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> bank_feb2026.csv</div>
+                                <div class="mi-stats">
+                                    <div class="mi-stat"><span class="mi-stat-n">47</span><span class="mi-stat-l">Parsed</span></div>
+                                    <div class="mi-stat"><span class="mi-stat-n">2</span><span class="mi-stat-l">Skipped</span></div>
+                                    <div class="mi-stat"><span class="mi-stat-n">12</span><span class="mi-stat-l">Income</span></div>
+                                </div>
+                                <div class="mi-preview-label">Preview</div>
+                                <div class="mi-row"><span>LIDL PARIS</span><span class="mi-cat">Groceries</span><span>-&euro;23.40</span></div>
+                                <div class="mi-row"><span>H&amp;M ONLINE</span><span class="mi-cat">Clothing</span><span>-&euro;59.00</span></div>
+                                <div class="mi-row"><span>STARBUCKS</span><span class="mi-cat">Cafe</span><span>-&euro;4.80</span></div>
+                                <div class="mi-btn">Import 47 expenses</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sc-info"><span class="sc-tag" data-i18n="sc4.tag">Импорт</span><h3 data-i18n="sc4.h3">CSV за секунды</h3><p data-i18n="sc4.p">Автоопределение формата, предпросмотр, категоризация, импорт. Готово.</p></div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-nav">
+            <button class="carousel-btn carousel-prev" id="carPrev"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+            <div class="carousel-dots" id="carDots"></div>
+            <button class="carousel-btn carousel-next" id="carNext"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+    </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section sec-flow" id="flow">
+    <div class="wrap">
+        <div class="sec-head"><span class="tag" data-i18n="flow.tag">Процесс импорта CSV</span><h2 data-i18n-html="flow.h2">От банковской выписки к аналитике.<br>В четыре шага.</h2></div>
+        <div class="flow-steps">
+            <div class="flow-step">
+                <div class="fs-left"><div class="fs-num">01</div><div class="fs-line"></div></div>
+                <div class="fs-body">
+                    <h3 data-i18n="flow1.h3">Загрузите CSV</h3>
+                    <p data-i18n="flow1.p">Экспортируйте из банка. Автоопределение формата, разделителя, псевдонимов колонок.</p>
+                    <div class="fs-tags"><span>, ; tab</span><span data-i18n="flow1.t2">автоопределение</span><span data-i18n="flow1.t3">мультибанк</span></div>
+                </div>
+            </div>
+            <div class="flow-step">
+                <div class="fs-left"><div class="fs-num">02</div><div class="fs-line"></div></div>
+                <div class="fs-body">
+                    <h3 data-i18n="flow2.h3">Предпросмотр и валидация</h3>
+                    <p data-i18n="flow2.p">Просмотрите распарсенные строки, пропущенные записи, отфильтрованные доходы. Полный контроль.</p>
+                    <div class="fs-tags"><span data-i18n="flow2.t1">распарсенные</span><span data-i18n="flow2.t2">пропущенные</span><span data-i18n="flow2.t3">доходы отфильтрованы</span></div>
+                </div>
+            </div>
+            <div class="flow-step">
+                <div class="fs-left"><div class="fs-num">03</div><div class="fs-line"></div></div>
+                <div class="fs-body">
+                    <h3 data-i18n="flow3.h3">Автокатегоризация</h3>
+                    <p data-i18n-html="flow3.p">3-уровневая классификация: правила мерчантов &rarr; словарь ключевых слов &rarr; локальный ML. Ручная коррекция.</p>
+                    <div class="fs-tags"><span data-i18n="flow3.t1">правила мерчантов</span><span data-i18n="flow3.t2">словарь</span><span data-i18n="flow3.t3">локальный ML</span></div>
+                </div>
+            </div>
+            <div class="flow-step">
+                <div class="fs-left"><div class="fs-num">04</div></div>
+                <div class="fs-body">
+                    <h3 data-i18n="flow4.h3">Сохранение и аналитика</h3>
+                    <p data-i18n="flow4.p">Массовая вставка в SQLite. Дедупликация через hashKey. Аналитика обновляется мгновенно.</p>
+                    <div class="fs-tags"><span>SQLite</span><span data-i18n="flow4.t2">дедупликация</span><span data-i18n="flow4.t3">мгновенно</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ LOCAL ML ============ -->
+<section class="section sec-ml" id="ml">
+    <div class="wrap">
+        <div class="sec-head"><span class="tag" data-i18n="ml.tag">Интеллект на устройстве</span><h2 data-i18n-html="ml.h2">Учится у вас.<br>Локально.</h2></div>
+        <div class="ml-cols">
+            <div class="ml-col ml-simple">
+                <div class="ml-label" data-i18n="ml.label1">Простое объяснение</div>
+                <h3 data-i18n="ml.simple.h3">Приложение запоминает ваши исправления.</h3>
+                <p data-i18n-html="ml.simple.p">Исправили категорию — запомнил. В следующий раз тот же мерчант — правильная категория. Всё происходит <em>на вашем телефоне</em>. Никакой облачной нейросети. Локальный текстовый матчинг, который улучшается с использованием.</p>
+                <div class="ml-demo">
+                    <div class="mld-step mld-1"><span class="mld-icon">&#9998;</span> <span data-i18n-html="ml.demo1">Вы исправляете "LIDL" &rarr; <strong>Продукты</strong></span></div>
+                    <div class="mld-arrow"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+                    <div class="mld-step mld-2"><span class="mld-icon">&#129504;</span> <span data-i18n="ml.demo2">Приложение сохраняет правило локально</span></div>
+                    <div class="mld-arrow"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+                    <div class="mld-step mld-3"><span class="mld-icon">&#10004;</span> <span data-i18n-html="ml.demo3">"LIDL PARIS" &rarr; Продукты</span></div>
+                </div>
+            </div>
+            <div class="ml-col ml-tech">
+                <div class="ml-label" data-i18n="ml.label2">Технические детали</div>
+                <div class="ml-layers">
+                    <div class="ml-layer" data-p="1">
+                        <div class="mll-head"><span class="mll-badge mll-b1">P1</span><strong data-i18n="ml.p1.name">Правила мерчантов</strong></div>
+                        <p data-i18n="ml.p1.desc">Точное / фразовое совпадение по нормализованному описанию. Высший приоритет.</p>
+                        <div class="mll-bar"><div class="mll-fill" data-w="100"></div></div>
+                    </div>
+                    <div class="ml-layer" data-p="2">
+                        <div class="mll-head"><span class="mll-badge mll-b2">P2</span><strong data-i18n="ml.p2.name">Словарь правил</strong></div>
+                        <p data-i18n="ml.p2.desc">Словарь ключевых слов по категориям с весовыми приоритетами.</p>
+                        <div class="mll-bar"><div class="mll-fill" data-w="72"></div></div>
+                    </div>
+                    <div class="ml-layer" data-p="3">
+                        <div class="mll-head"><span class="mll-badge mll-b3">P3</span><strong data-i18n="ml.p3.name">Локальный ML-классификатор</strong></div>
+                        <p data-i18n="ml.p3.desc">Bag-of-words + n-grams, косинусное сходство. На истории пользователя.</p>
+                        <div class="mll-bar"><div class="mll-fill" data-w="52"></div></div>
+                    </div>
+                    <div class="ml-layer ml-layer-fb">
+                        <div class="mll-head"><span class="mll-badge mll-bfb">&mdash;</span><strong data-i18n="ml.fb.name">Фоллбэк</strong></div>
+                        <p data-i18n="ml.fb.desc">Низкая уверенность &rarr; остаётся без категории для ручной проверки.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ PRIVACY ============ -->
+<section class="section sec-privacy" id="privacy">
+    <div class="wrap">
+        <div class="priv-layout">
+            <div class="priv-left">
+                <span class="tag" data-i18n="priv.tag">Приватность и безопасность</span>
+                <h2 data-i18n-html="priv.h2">Ваши финансы.<br>Ваше устройство.<br>Ваши правила.</h2>
+            </div>
+            <div class="priv-right">
+                <div class="priv-item"><div class="priv-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><strong data-i18n="priv1.title">Локальная обработка</strong><p data-i18n="priv1.p">Все данные обрабатываются и хранятся на устройстве. Ничего не покидает ваш телефон.</p></div></div>
+                <div class="priv-item"><div class="priv-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div><div><strong data-i18n="priv2.title">Без серверов</strong><p data-i18n="priv2.p">Нет backend API. Нет облака. Нет серверной обработки.</p></div></div>
+                <div class="priv-item"><div class="priv-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><strong data-i18n="priv3.title">Без регистрации</strong><p data-i18n="priv3.p">Никакого email, телефона, аккаунта. Установите и пользуйтесь.</p></div></div>
+                <div class="priv-item"><div class="priv-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div><strong data-i18n="priv4.title">Файлы остаются на устройстве</strong><p data-i18n="priv4.p">CSV-файлы читаются на устройстве, никогда не загружаются на сервер.</p></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ ARCHITECTURE ============ -->
+<section class="section sec-arch" id="arch">
+    <div class="wrap">
+        <div class="sec-head"><span class="tag" data-i18n="arch.tag">Архитектура</span><h2 data-i18n="arch.h2">Под капотом.</h2></div>
+        <div class="arch-grid">
+            <div class="arch-card">
+                <h3 class="ac-title" data-i18n="arch.stack">Технологический стек</h3>
+                <div class="stack-rows">
+                    <div class="sr"><span class="sr-k" data-i18n="arch.lang">Язык</span><span class="sr-v">TypeScript</span></div>
+                    <div class="sr"><span class="sr-k" data-i18n="arch.framework">Фреймворк</span><span class="sr-v">React Native (Expo)</span></div>
+                    <div class="sr"><span class="sr-k" data-i18n="arch.nav">Навигация</span><span class="sr-v">Expo Router</span></div>
+                    <div class="sr"><span class="sr-k" data-i18n="arch.db">База данных</span><span class="sr-v">SQLite (expo-sqlite)</span></div>
+                    <div class="sr"><span class="sr-k">UI</span><span class="sr-v" data-i18n="arch.ui.val">Кастомные компоненты</span></div>
+                    <div class="sr"><span class="sr-k" data-i18n="arch.platforms">Платформы</span><span class="sr-v">iOS + Android</span></div>
+                    <div class="sr"><span class="sr-k" data-i18n="arch.architecture">Архитектура</span><span class="sr-v" data-i18n="arch.arch.val">Только локально</span></div>
+                </div>
+            </div>
+            <div class="arch-card">
+                <h3 class="ac-title" data-i18n="arch.model">Модель данных</h3>
+                <div class="db-list">
+                    <div class="db-t"><span class="db-n">transactions</span><span class="db-f">id · amount · category · date · description · source · hashKey</span></div>
+                    <div class="db-t"><span class="db-n">merchant_rules</span><span class="db-f">id · pattern · category · match_type</span></div>
+                    <div class="db-t"><span class="db-n">categories</span><span class="db-f">id · name · icon · is_system</span></div>
+                    <div class="db-t"><span class="db-n">settings</span><span class="db-f">key · value</span></div>
+                </div>
+            </div>
+            <div class="arch-card arch-full">
+                <h3 class="ac-title" data-i18n="arch.flow">Поток данных</h3>
+                <div class="pipe" id="pipeline">
+                    <div class="pipe-n" data-i18n="arch.pipe1">CSV / Ручной ввод</div>
+                    <div class="pipe-a"><span></span><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                    <div class="pipe-n" data-i18n="arch.pipe2">Парсер</div>
+                    <div class="pipe-a"><span></span><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                    <div class="pipe-n" data-i18n="arch.pipe3">Категоризатор</div>
+                    <div class="pipe-a"><span></span><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                    <div class="pipe-n">SQLite</div>
+                    <div class="pipe-a"><span></span><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                    <div class="pipe-n" data-i18n="arch.pipe5">UI-слой</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section sec-cta" id="download">
+    <div class="wrap">
+        <div class="cta-box">
+            <div class="cta-orb1"></div>
+            <div class="cta-orb2"></div>
+            <h2 data-i18n-html="cta.h2">Начните учёт.<br>Забудьте о беспокойстве.</h2>
+            <p class="cta-sub" data-i18n="cta.sub">Бесплатно. Приватно. Без аккаунта.</p>
+            <div class="cta-btns">
+                <a href="#" class="store-btn magnetic">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    <div><span class="sb-sm" data-i18n="cta.appstore.sm">Загрузите в</span><span class="sb-lg">App Store</span></div>
+                </a>
+                <a href="#" class="store-btn magnetic">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-1.4l2.834 1.639a1 1 0 010 1.726l-2.834 1.64-2.532-2.533 2.532-2.471zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                    <div><span class="sb-sm" data-i18n="cta.gplay.sm">Доступно в</span><span class="sb-lg">Google Play</span></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="wrap">
+        <div class="foot-top">
+            <div class="foot-brand"><a href="#" class="logo"><div class="logo-mark">M</div>My Expenses</a><p data-i18n="foot.desc">Приватный учёт расходов.</p></div>
+            <div class="foot-col"><h4 data-i18n="foot.col1">Продукт</h4><a href="#features" data-i18n="nav.features">Возможности</a><a href="#screens" data-i18n="nav.interface">Интерфейс</a><a href="#flow" data-i18n="nav.how">Как работает</a><a href="#download" data-i18n="nav.download">Скачать</a></div>
+            <div class="foot-col"><h4 data-i18n="foot.col2">Технологии</h4><a href="#ml" data-i18n="nav.ml">Локальный ML</a><a href="#arch" data-i18n="nav.tech">Технологии</a><a href="#privacy" data-i18n="nav.privacy">Приватность</a></div>
+            <div class="foot-col"><h4 data-i18n="foot.col3">Контакт</h4><a href="mailto:hello@myexpenses.app">hello@myexpenses.app</a></div>
+        </div>
+        <div class="foot-bot"><span>&copy; 2026 My Expenses</span></div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
