@@ -340,7 +340,7 @@ img{display:block;max-width:100%}
     .hero-h1{font-size:clamp(38px,11vw,60px)}
 
     /* ---- Mobile phones: show all 3 scaled down ---- */
-    .hero-phones{margin-top:40px;gap:0;perspective:800px;transform:scale(0.7);transform-origin:top center;margin-bottom:-80px}
+    .hero-phones{margin-top:40px;gap:0;perspective:800px;transform:scale(0.55);transform-origin:top center;margin-bottom:-200px}
     .h-phone-l,.h-phone-r{display:block}
     .phone-glow{display:none}
 
