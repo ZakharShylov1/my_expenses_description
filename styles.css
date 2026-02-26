@@ -340,12 +340,8 @@ img{display:block;max-width:100%}
     .hero-h1{font-size:clamp(38px,11vw,60px)}
 
     /* ---- Mobile phones: show all 3 scaled down ---- */
-    .hero-phones{margin-top:48px;gap:0;perspective:800px}
+    .hero-phones{margin-top:40px;gap:0;perspective:800px;transform:scale(0.7);transform-origin:top center;margin-bottom:-80px}
     .h-phone-l,.h-phone-r{display:block}
-    .h-phone-c .mockup{width:clamp(160px,38vw,200px)}
-    .h-phone-l .mockup,.h-phone-r .mockup{width:clamp(130px,30vw,170px)}
-    .h-phone-l{margin-right:-16px}
-    .h-phone-r{margin-left:-16px}
     .phone-glow{display:none}
 
     .hero-phone-dots{display:none}
