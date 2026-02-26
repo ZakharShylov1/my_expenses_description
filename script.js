@@ -428,88 +428,24 @@ htl.to('.h1-word', {
 htl.to('.hero-sub', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5');
 htl.to('.hero-btns', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6');
 
-// Phones — different animations for mobile vs desktop
-if (isMobile()) {
-    // Mobile: all 3 phones slide up with stagger
-    htl.from('.h-phone-l', {
-        y: 100, opacity: 0, scale: 0.9, rotation: -3,
-        duration: 1, ease: 'power3.out'
-    }, '-=0.5');
+// Phones — center first, then sides
+htl.from('.h-phone-c', {
+    y: 140, opacity: 0, scale: 0.88, rotateX: 12,
+    duration: 1.3, ease: 'power3.out'
+}, '-=0.7');
 
-    htl.from('.h-phone-c', {
-        y: 120, opacity: 0, scale: 0.92,
-        duration: 1.1, ease: 'power3.out'
-    }, '-=0.85');
+htl.from('.h-phone-l', {
+    x: -100, y: 80, opacity: 0, rotateY: 20, rotateZ: -4,
+    duration: 1.1, ease: 'power3.out'
+}, '-=1.0');
 
-    htl.from('.h-phone-r', {
-        y: 100, opacity: 0, scale: 0.9, rotation: 3,
-        duration: 1, ease: 'power3.out'
-    }, '-=0.85');
-
-    // Scroll to center phone after animation
-    htl.add(() => {
-        const phonesContainer = qs('#heroPhones');
-        const centerPhone = qs('#phoneC');
-        if (phonesContainer && centerPhone) {
-            const scrollPos = centerPhone.offsetLeft - (phonesContainer.offsetWidth - centerPhone.offsetWidth) / 2;
-            phonesContainer.scrollTo({ left: scrollPos, behavior: 'smooth' });
-        }
-    });
-} else {
-    // Desktop: center first, then sides
-    htl.from('.h-phone-c', {
-        y: 140, opacity: 0, scale: 0.88, rotateX: 12,
-        duration: 1.3, ease: 'power3.out'
-    }, '-=0.7');
-
-    htl.from('.h-phone-l', {
-        x: -100, y: 80, opacity: 0, rotateY: 20, rotateZ: -4,
-        duration: 1.1, ease: 'power3.out'
-    }, '-=1.0');
-
-    htl.from('.h-phone-r', {
-        x: 100, y: 80, opacity: 0, rotateY: -20, rotateZ: 4,
-        duration: 1.1, ease: 'power3.out'
-    }, '-=1.0');
-}
+htl.from('.h-phone-r', {
+    x: 100, y: 80, opacity: 0, rotateY: -20, rotateZ: 4,
+    duration: 1.1, ease: 'power3.out'
+}, '-=1.0');
 
 // Metrics
 htl.to('.hero-metrics', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6');
-
-/* ==========================================================
-   HERO — MOBILE PHONE CAROUSEL DOTS
-   ========================================================== */
-if (isMobile()) {
-    const phonesScroller = qs('#heroPhones');
-    const phoneDots = qa('.hero-phone-dot');
-    const phones = [qs('#phoneL'), qs('#phoneC'), qs('#phoneR')];
-
-    if (phonesScroller && phoneDots.length) {
-        // Track scroll position and update dots
-        phonesScroller.addEventListener('scroll', () => {
-            const scrollLeft = phonesScroller.scrollLeft;
-            const scrollWidth = phonesScroller.scrollWidth - phonesScroller.offsetWidth;
-            const progress = scrollLeft / scrollWidth;
-
-            let activeIdx = 0;
-            if (progress > 0.66) activeIdx = 2;
-            else if (progress > 0.33) activeIdx = 1;
-
-            phoneDots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
-        }, { passive: true });
-
-        // Click dots to scroll to phone
-        phoneDots.forEach(dot => {
-            dot.addEventListener('click', () => {
-                const idx = parseInt(dot.dataset.idx);
-                const target = phones[idx];
-                if (!target) return;
-                const scrollPos = target.offsetLeft - (phonesScroller.offsetWidth - target.offsetWidth) / 2;
-                phonesScroller.scrollTo({ left: scrollPos, behavior: 'smooth' });
-            });
-        });
-    }
-}
 
 /* ==========================================================
    HERO — PARALLAX ON SCROLL
@@ -534,16 +470,6 @@ if (!isMobile()) {
     gsap.to('.hero-metrics', {
         y: -50,
         scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 }
-    });
-} else {
-    // Mobile: subtle parallax on scroll for hero content
-    gsap.to('.hero-content', {
-        y: -40, opacity: 0.5,
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: '70% top', scrub: 1.5 }
-    });
-    gsap.to('#heroPhones', {
-        y: -25,
-        scrollTrigger: { trigger: '.hero', start: '30% top', end: 'bottom top', scrub: 1.5 }
     });
 }
 

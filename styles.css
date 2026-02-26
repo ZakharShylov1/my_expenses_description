@@ -339,37 +339,16 @@ img{display:block;max-width:100%}
     .hero-content{padding:100px 20px 40px;min-height:auto}
     .hero-h1{font-size:clamp(38px,11vw,60px)}
 
-    /* ---- Mobile phones: horizontal snap carousel ---- */
-    .hero-phones{
-        width:100%;margin-top:48px;gap:0;perspective:none;
-        overflow-x:auto;overflow-y:hidden;
-        scroll-snap-type:x mandatory;
-        -webkit-overflow-scrolling:touch;
-        padding:20px 20px 32px;
-        scroll-padding:0 20px;
-        mask-image:linear-gradient(90deg,transparent,black 5%,black 95%,transparent);
-        -webkit-mask-image:linear-gradient(90deg,transparent,black 5%,black 95%,transparent);
-    }
-    .hero-phones::-webkit-scrollbar{display:none}
-    .hero-phones{scrollbar-width:none}
-
-    .h-phone-l,.h-phone-r{display:block!important;margin:0}
-    .h-phone{
-        flex-shrink:0;scroll-snap-align:center;
-        transition:transform .5s var(--ease),opacity .5s;
-    }
-    .h-phone-c .mockup{width:clamp(220px,60vw,280px)}
-    .h-phone-l .mockup,.h-phone-r .mockup{width:clamp(200px,55vw,260px)}
-    .h-phone-l{margin-right:16px}
-    .h-phone-r{margin-left:16px}
-    .h-phone-c{margin-right:16px}
+    /* ---- Mobile phones: show all 3 scaled down ---- */
+    .hero-phones{margin-top:48px;gap:0;perspective:800px}
+    .h-phone-l,.h-phone-r{display:block}
+    .h-phone-c .mockup{width:clamp(160px,38vw,200px)}
+    .h-phone-l .mockup,.h-phone-r .mockup{width:clamp(130px,30vw,170px)}
+    .h-phone-l{margin-right:-16px}
+    .h-phone-r{margin-left:-16px}
     .phone-glow{display:none}
 
-    /* Dots indicator for phone carousel */
-    .hero-phone-dots{display:flex!important;justify-content:center;gap:8px;margin-top:4px;position:relative;z-index:2}
-    .hero-phone-dot{width:8px;height:8px;border-radius:50%;background:var(--s3);border:none;padding:0;cursor:pointer;transition:background .3s,transform .3s}
-    .hero-phone-dot.active{background:var(--acc);transform:scale(1.4)}
-
+    .hero-phone-dots{display:none}
     .hero-metrics{flex-wrap:wrap;border-radius:20px;padding:16px 20px;gap:12px;margin-top:40px}.hm-div{display:none}
     .feat-grid,.ml-cols,.arch-grid{grid-template-columns:1fr}
     .priv-layout{grid-template-columns:1fr;gap:40px}
@@ -381,7 +360,6 @@ img{display:block;max-width:100%}
     .foot-top{grid-template-columns:1fr 1fr;gap:28px}.foot-brand{grid-column:1/-1}
 }
 
-/* Hide phone dots on desktop */
 .hero-phone-dots{display:none}
 @media(max-width:480px){
     .hero-btns{flex-direction:column;align-items:center}
