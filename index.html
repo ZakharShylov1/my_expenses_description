@@ -34,8 +34,20 @@
             <button class="lang-btn" data-lang="en">EN</button>
         </div>
         <a href="#download" class="nav-cta magnetic" data-i18n="nav.download">Скачать</a>
+        <button class="nav-burger" id="navBurger"><span></span><span></span><span></span></button>
     </div>
 </nav>
+
+<!-- Mobile menu overlay -->
+<div class="nav-mobile-menu" id="navMobileMenu">
+    <a href="#features" data-i18n="nav.features">Возможности</a>
+    <a href="#screens" data-i18n="nav.interface">Интерфейс</a>
+    <a href="#flow" data-i18n="nav.how">Как работает</a>
+    <a href="#ml" data-i18n="nav.ml">Локальный ML</a>
+    <a href="#arch" data-i18n="nav.tech">Технологии</a>
+    <a href="#privacy" data-i18n="nav.privacy">Приватность</a>
+    <a href="#download" data-i18n="nav.download">Скачать</a>
+</div>
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="hero">
@@ -127,6 +139,13 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Phone carousel dots (mobile only) -->
+    <div class="hero-phone-dots" id="heroPhoneDots">
+        <button class="hero-phone-dot active" data-idx="0"></button>
+        <button class="hero-phone-dot" data-idx="1"></button>
+        <button class="hero-phone-dot" data-idx="2"></button>
     </div>
 
     <!-- Metrics bar -->
