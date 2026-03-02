@@ -7,6 +7,16 @@
 
 gsap.registerPlugin(ScrollTrigger);
 
+/* ==========================================================
+   LENIS SMOOTH SCROLL
+   ========================================================== */
+const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add(t => lenis.raf(t * 1000));
+gsap.ticker.lagSmoothing(0);
+// Pause during preloader
+lenis.stop();
+
 /* ---- helpers ---- */
 const qs = (s, p) => (p || document).querySelector(s);
 const qa = (s, p) => [...(p || document).querySelectorAll(s)];
@@ -411,41 +421,104 @@ qa('a[href^="#"]').forEach(a => {
 });
 
 /* ==========================================================
-   HERO — ENTRANCE TIMELINE
+   PRELOADER ANIMATION
    ========================================================== */
-const htl = gsap.timeline({ delay: 0.2 });
+const preloader = qs('#preloader');
+const preloaderFill = qs('#preloaderFill');
+const preloaderPercent = qs('#preloaderPercent');
+const brandLetters = qa('.preloader-brand span');
 
-// Pill
-htl.to('.hero-pill', { opacity: 1, duration: 0.6, ease: 'power3.out' });
+const preloaderTl = gsap.timeline();
 
-// Words fly in
-htl.to('.h1-word', {
-    opacity: 1, y: 0, rotateX: 0,
-    duration: 1.1, ease: 'power4.out', stagger: 0.09
+// Phase 1a: Letters rise up
+preloaderTl.to(brandLetters, {
+    y: 0,
+    duration: 0.8,
+    ease: 'power3.out',
+    stagger: 0.04
+});
+
+// Phase 1b: Show progress bar + fill it
+preloaderTl.to('.preloader-progress-wrap', {
+    opacity: 1,
+    duration: 0.3
 }, '-=0.3');
 
-// Subtitle + buttons
-htl.to('.hero-sub', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5');
-htl.to('.hero-btns', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6');
+// Animate progress fill and counter together
+const counterObj = { val: 0 };
+preloaderTl.to(preloaderFill, {
+    scaleX: 1,
+    duration: 1.8,
+    ease: 'power2.inOut'
+}, '-=0.1');
+preloaderTl.to(counterObj, {
+    val: 100,
+    duration: 1.8,
+    ease: 'power2.inOut',
+    onUpdate: () => {
+        preloaderPercent.textContent = Math.round(counterObj.val) + '%';
+    }
+}, '<'); // sync with fill
 
-// Phones — center first, then sides
-htl.from('.h-phone-c', {
-    y: 140, opacity: 0, scale: 0.88, rotateX: 12,
-    duration: 1.3, ease: 'power3.out'
-}, '-=0.7');
+// Phase 1c: Slide preloader up and reveal site
+preloaderTl.to(preloader, {
+    yPercent: -100,
+    duration: 1,
+    ease: 'power4.inOut',
+    onStart: () => {
+        // Start hero 0.4s overlap before preloader fully gone
+        gsap.delayedCall(0.6, heroEntrance);
+    },
+    onComplete: () => {
+        preloader.style.display = 'none';
+        document.body.classList.remove('is-loading');
+        lenis.start();
+    }
+}, '+=0.2');
 
-htl.from('.h-phone-l', {
-    x: -100, y: 80, opacity: 0, rotateY: 20, rotateZ: -4,
-    duration: 1.1, ease: 'power3.out'
-}, '-=1.0');
+/* ==========================================================
+   HERO — ENTRANCE TIMELINE
+   ========================================================== */
+function heroEntrance() {
+    const htl = gsap.timeline();
 
-htl.from('.h-phone-r', {
-    x: 100, y: 80, opacity: 0, rotateY: -20, rotateZ: 4,
-    duration: 1.1, ease: 'power3.out'
-}, '-=1.0');
+    // Pill (overline)
+    htl.to('.hero-pill', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
 
-// Metrics
-htl.to('.hero-metrics', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6');
+    // Words fly in
+    htl.to('.h1-word', {
+        opacity: 1, y: 0, rotateX: 0,
+        duration: 1.2, ease: 'power4.out', stagger: 0.12
+    }, '-=0.5');
+
+    // Subtitle
+    htl.to('.hero-sub', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6');
+
+    // CTA buttons
+    htl.to('.hero-btns', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6');
+
+    // Scroll cue
+    htl.to('.scroll-cue', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.3');
+
+    // Phones — center first, then sides
+    htl.from('.h-phone-c', {
+        y: 140, opacity: 0, scale: 0.88, rotateX: 12,
+        duration: 1.3, ease: 'power3.out'
+    }, '-=0.9');
+
+    htl.from('.h-phone-l', {
+        x: -100, y: 80, opacity: 0, rotateY: 20, rotateZ: -4,
+        duration: 1.1, ease: 'power3.out'
+    }, '-=1.0');
+
+    htl.from('.h-phone-r', {
+        x: 100, y: 80, opacity: 0, rotateY: -20, rotateZ: 4,
+        duration: 1.1, ease: 'power3.out'
+    }, '-=1.0');
+
+    // Metrics
+    htl.to('.hero-metrics', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6');
+}
 
 /* ==========================================================
    HERO — PARALLAX ON SCROLL
