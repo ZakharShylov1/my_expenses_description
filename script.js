@@ -325,35 +325,6 @@ if (langSwitch) {
     });
 }
 
-/* ==========================================================
-   CUSTOM CURSOR
-   ========================================================== */
-const curDot = qs('#cursor');
-const curRing = qs('#cursorRing');
-
-if (curDot && curRing && !isTouch()) {
-    let mx = -100, my = -100;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-
-    // Dot — instant via GSAP ticker
-    gsap.ticker.add(() => {
-        gsap.set(curDot, { x: mx - 6, y: my - 6 });
-    });
-
-    // Ring — smooth follow
-    let rx = -100, ry = -100;
-    gsap.ticker.add(() => {
-        rx += (mx - rx) * 0.12;
-        ry += (my - ry) * 0.12;
-        gsap.set(curRing, { x: rx - 20, y: ry - 20 });
-    });
-
-    // Hover interactions
-    qa('a, button, .feat-card, .pipe-n, .module-chip, .store-btn, .magnetic').forEach(el => {
-        el.addEventListener('mouseenter', () => curRing.classList.add('hover'));
-        el.addEventListener('mouseleave', () => curRing.classList.remove('hover'));
-    });
-}
 
 /* ==========================================================
    MAGNETIC BUTTONS
